@@ -4,6 +4,8 @@ import {LoginComponent} from './login/login.component';
 import {JoinComponent} from './join/join.component';
 import {HomeComponent} from './home/home.component';
 import {LoggedInGuard} from './guards/logged-in.guard';
+import {ConversationListComponent} from './conversation-list/conversation-list.component';
+import {UserListComponent} from './user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -12,7 +14,20 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [LoggedInGuard]
+    canActivate: [LoggedInGuard],
+    children: [
+      {
+        path: '',
+        component: ConversationListComponent
+      },
+      {
+        path: 'user-list',
+        component: UserListComponent
+      },
+      {
+        path: '**', redirectTo: '', pathMatch: 'full'
+      }
+    ]
   },
   { path:  '', redirectTo: 'login', pathMatch: 'full' },
   { path:  '**', redirectTo: 'login', pathMatch: 'full' },

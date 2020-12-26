@@ -1,0 +1,8 @@
+.link:hover{
+  color: gray;
+  cursor: pointer;
+}
+
+.link {
+  margin: 10px;
+}
