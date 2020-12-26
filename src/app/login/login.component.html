@@ -1,0 +1,8 @@
+<div class="content parent-column">
+  <h1 class="item">WebChat</h1>
+  <input class="item" type="text" [(ngModel)]="user" placeholder="Usuario">
+  <input class="item" type="password" [(ngModel)]="password" placeholder="Contraseña">
+  <button class="item btn btn-info" (click)="login()" [disabled]="disabled()">Login</button>
+  <button class="item btn btn-link" (click)="join()">Crear Cuenta</button>
+  <div *ngIf="showError" class="alert alert-danger">Usuario o contraseña incorrecto</div>
+</div>

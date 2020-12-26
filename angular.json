@@ -24,11 +24,24 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -64,6 +77,9 @@
             "browserTarget": "chat-front:build"
           },
           "configurations": {
+            "local": {
+              "browserTarget": "chat-front:build:local"
+            },
             "production": {
               "browserTarget": "chat-front:build:production"
             }
@@ -120,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "chat-front"
+  "defaultProject": "chat-front",
+  "cli": {
+    "analytics": "3b0a5566-00f7-4ab6-8632-ccceaa4e13f8"
+  }
 }

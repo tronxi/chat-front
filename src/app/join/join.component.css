@@ -1,0 +1,10 @@
+.parent-column {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+.item {
+  margin: 5px;
+  align-self: center;
+}
