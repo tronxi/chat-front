@@ -6,6 +6,7 @@ import {HomeComponent} from './home/home.component';
 import {LoggedInGuard} from './guards/logged-in.guard';
 import {ConversationListComponent} from './conversation-list/conversation-list.component';
 import {UserListComponent} from './user-list/user-list.component';
+import {ConversationDetailComponent} from './conversation-detail/conversation-detail.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: '',
         component: ConversationListComponent
+      },
+      {
+        path: 'conversation-detail/:conversationId/name/:name',
+        component: ConversationDetailComponent
       },
       {
         path: 'user-list',

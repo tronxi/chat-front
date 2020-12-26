@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../services/user.service';
+import {TokenService} from '../services/token.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-conversation-list',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationListComponent implements OnInit {
 
-  constructor() { }
+  conversationList = [];
+
+  constructor(private userService: UserService,
+              private tokenService: TokenService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.userService.findConversationsByUserId(this.tokenService.retrieveUserId()).subscribe(response => {
+      this.conversationList = response;
+    });
   }
 
+  conversationDetail(conversationId: string, conversationName: string): void {
+    console.log(conversationId);
+    this.router.navigateByUrl('/home/conversation-detail/' + conversationId + '/name/' + conversationName);
+  }
 }

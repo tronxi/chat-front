@@ -1,0 +1,15 @@
+.user-list-parent {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.conversation-card {
+  width: 300px;
+  margin: 10px;
+}
+
+.card-body {
+  align-self: center;
+}
+

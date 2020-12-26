@@ -1,1 +1,11 @@
-<p>conversation-list works!</p>
+<div class="content conversation-list-parent">
+  <div *ngFor="let conversation of conversationList" class="card conversation-card">
+    <div class="card-header card-row">
+      <span>{{conversation.name}}</span>
+      <span *ngIf="conversation.unreadMessages !== 0" class="unread-messages">{{conversation.unreadMessages}}</span>
+    </div>
+    <div class="card-body">
+      <button class="btn btn-info" (click)="conversationDetail(conversation.conversationId, conversation.name)">Chat</button>
+    </div>
+  </div>
+</div>

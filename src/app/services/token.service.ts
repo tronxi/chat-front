@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,14 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
   constructor() { }
+
+  getDecodedAccessToken(): any {
+    try {
+      return jwt_decode(this.get());
+    } catch (Error) {
+      return null;
+    }
+  }
 
   save(token: string): void {
     sessionStorage.setItem('token', token);
@@ -21,5 +30,9 @@ export class TokenService {
 
   exist(): boolean {
     return this.get() !== null;
+  }
+
+  retrieveUserId(): string {
+    return this.getDecodedAccessToken().id;
   }
 }

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.tokenService.destroy();
   }
 
   disabled(): boolean {

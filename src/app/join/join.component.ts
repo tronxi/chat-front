@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../services/user.service';
+import {TokenService} from '../services/token.service';
 
 @Component({
   selector: 'app-join',
@@ -13,9 +14,11 @@ export class JoinComponent implements OnInit {
   showError = false;
 
   constructor(private router: Router,
-              private userService: UserService) { }
+              private userService: UserService,
+              private tokenService: TokenService) { }
 
   ngOnInit(): void {
+    this.tokenService.destroy();
   }
 
   join(): void {

@@ -1,1 +1,10 @@
-<p>user-list works!</p>
+<div class="content user-list-parent">
+  <div *ngFor="let user of userList" class="card conversation-card">
+    <div class="card-header">
+      <span>{{user.name}}</span>
+    </div>
+    <div class="card-body">
+      <button class="btn btn-info" (click)="conversationDetail(user.id, user.name)">Chat</button>
+    </div>
+  </div>
+</div>

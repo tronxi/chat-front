@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable} from 'rxjs';
@@ -12,5 +12,13 @@ export class UserService {
 
   create(name: string, password: string): Observable<any> {
     return this.http.post(environment.url + '/users', {name, password});
+  }
+
+  findConversationsByUserId(userId: string): Observable<any> {
+    return this.http.get(environment.url + '/users/' + userId + '/conversations');
+  }
+
+  findAll(): Observable<any> {
+    return this.http.get(environment.url + '/users');
   }
 }
