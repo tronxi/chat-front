@@ -1,26 +1,29 @@
 .isMyMessage {
-  max-width: 100px;
-  margin: 5px;
+  text-align: center;
+  margin: 5px 0 5px auto;
+  width: max-content;
+  max-width: 200px;
   padding: 5px;
   border-radius: 10px;
   background-color: #abeb34;
 }
 .isNotMyMessage {
+  text-align: center;
+  margin: 5px auto 5px 0;
+  width: max-content;
   max-width: 200px;
-  margin: 5px;
   padding: 5px;
   border-radius: 10px;
   background-color: aqua;
 }
 .row {
   width: 100%;
+  height: auto;
+
 }
 .card-body {
   width: 100%;
   height: 60vh;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
 }
 
 .card-header {

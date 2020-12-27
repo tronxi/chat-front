@@ -4,7 +4,7 @@
       <h4>{{conversationName}}</h4>
     </div>
     <div class="card-body overflow-auto" #scrollMessages>
-      <div *ngFor="let message of messageList" class="row" [ngClass]="{'justify-content-end': message.isMyMessage === true}">
+      <div *ngFor="let message of messageList">
         <div [ngClass]="{'isMyMessage': message.isMyMessage === true,
                          'isNotMyMessage': message.isMyMessage === false}">
           {{message.message}}
