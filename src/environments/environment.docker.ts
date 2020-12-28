@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  url: 'http://chat-service:8080'
+  url: 'http://34.68.171.79:8080'
 };
