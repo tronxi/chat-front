@@ -1,9 +1,9 @@
 FROM alpine/git as git
-ARG token
+ARG BRANCH=master
 WORKDIR /repo
 ADD https://api.github.com/repos/tronxi/chat-front/git/refs/heads/master version.json
 RUN git clone https://github.com/tronxi/chat-front.git
-RUN cd chat-front && git checkout master
+RUN cd chat-front && git checkout $BRANCH
 
 FROM node:current-alpine3.12 as builder
 ARG ENVIRONMENT=dev
