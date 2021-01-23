@@ -5,6 +5,7 @@ import {MessageService} from '../services/message.service';
 import {Client} from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import {environment} from '../../environments/environment';
+import {CypherService} from '../services/cypher.service';
 
 @Component({
   selector: 'app-conversation-detail',
@@ -21,10 +22,13 @@ export class ConversationDetailComponent implements OnInit, OnDestroy{
   conversationName: string;
   messageList = [];
   message = '';
+  key = '';
+  keyForm = '';
 
   constructor(private route: ActivatedRoute,
               private tokenService: TokenService,
-              private messageService: MessageService) { }
+              private messageService: MessageService,
+              private cypherService: CypherService) { }
 
   ngOnInit(): void {
     this.conversationId = this.route.snapshot.paramMap.get('conversationId');
@@ -50,7 +54,12 @@ export class ConversationDetailComponent implements OnInit, OnDestroy{
 
   retrieveMessages(): void {
     this.messageService.read(this.conversationId, this.tokenService.retrieveUserId()).subscribe(response => {
-      this.messageList = response;
+      this.messageList = response.map(res => {
+        return {
+          message: this.decrypt(res.message),
+          isMyMessage: res.isMyMessage
+        };
+      });
       setTimeout(() =>  this.scrollDown(), 500);
     });
   }
@@ -60,10 +69,23 @@ export class ConversationDetailComponent implements OnInit, OnDestroy{
 
   send(): void {
     if (this.message === '') { return; }
-    const messageToSend = this.message;
+    const messageToSend = this.encrypt(this.message);
     this.message = '';
     this.messageService.send(this.conversationId, this.tokenService.retrieveUserId(), messageToSend).subscribe(response => {
     });
+  }
+
+  changeKey(): void {
+    this.key = this.keyForm;
+    this.retrieveMessages();
+  }
+
+  encrypt(message: string): string {
+    return this.cypherService.encrypt(message, this.key);
+  }
+
+  decrypt(message: string): string {
+    return this.cypherService.decrypt(message, this.key);
   }
 
 }

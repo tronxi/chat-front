@@ -25,6 +25,7 @@
     "@stomp/stompjs": "^6.0.0",
     "@types/sockjs": "^0.3.32",
     "bootstrap": "^4.5.3",
+    "crypto-js": "^4.0.0",
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
     "rxjs": "~6.6.0",

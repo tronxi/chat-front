@@ -1,4 +1,5 @@
 <div class="content">
+  Clave: {{key}}
   <div class="card">
     <div class="card-header">
       <h4>{{conversationName}}</h4>
@@ -15,6 +16,10 @@
     <div class="input-row">
       <input type="text" class="input-message" [(ngModel)]="message">
       <button class="btn btn-link" (click)="send()">Enviar</button>
+    </div>
+    <div class="input-row">
+      <input type="text" class="input-message" [(ngModel)]="keyForm">
+      <button class="btn btn-link" (click)="changeKey()">Clave</button>
     </div>
   </div>
 </div>
