@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  url: 'https://tronxi.ddns.net:8080'
+  url: 'https://tronxi.ddns.net/chat-nginx'
 };
