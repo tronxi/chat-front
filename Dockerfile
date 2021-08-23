@@ -11,7 +11,7 @@ COPY --from="git" /repo/chat-front /front
 WORKDIR /front
 RUN npm install -y
 RUN npm install -g @angular/cli -y
-RUN ng build --configuration=$ENVIRONMENT --base-href /
+RUN ng build --configuration=$ENVIRONMENT --base-href /chat/
 
 FROM nginx:1.17.6-alpine
 RUN rm -r /usr/share/nginx/html/
