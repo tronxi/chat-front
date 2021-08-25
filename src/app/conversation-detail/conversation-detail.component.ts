@@ -128,7 +128,9 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   private createPeerConnection(): void {
     this.peerConnection = new RTCPeerConnection({
       iceServers: [
-        {urls: ['stun:stun.kundenserver.de:3478']}
+        {
+          urls: 'stun:stun1.l.google.com:19302'
+        }
       ]
     });
 
