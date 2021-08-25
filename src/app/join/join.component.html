@@ -1,7 +1,7 @@
 <div class="content parent-column">
   <h1 class="item">Crea tu cuenta</h1>
   <input class="item" type="text" [(ngModel)]="user" placeholder="Usuario">
-  <input class="item" type="password" [(ngModel)]="password" placeholder="Contraseña">
+  <input class="item" type="password" [(ngModel)]="password" placeholder="Contraseña" (keyup.enter)="join()">
   <button class="item btn btn-info" (click)="join()" [disabled]="disabled()">Crear Cuenta</button>
   <button class="item btn btn-link" (click)="login()">Login</button>
   <div *ngIf="showError" class="alert alert-danger">El usuario ya existe</div>

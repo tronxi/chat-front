@@ -14,6 +14,11 @@ import {WebrtcService} from '../services/webrtc.service';
 })
 export class ConversationDetailComponent implements OnInit, OnDestroy, AfterViewInit{
 
+  constructor(private route: ActivatedRoute,
+              private tokenService: TokenService,
+              private messageService: MessageService,
+              private webRTCService: WebrtcService) { }
+
   private client: Client;
   private localStream: MediaStream;
   private peerConnection: RTCPeerConnection;
@@ -34,11 +39,8 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
     offerToReceiveAudio: true,
     offerToReceiveVideo: true
   };
-
-  constructor(private route: ActivatedRoute,
-              private tokenService: TokenService,
-              private messageService: MessageService,
-              private webRTCService: WebrtcService) { }
+  inCall = false;
+  localVideoActive = false;
 
   ngOnInit(): void {
     this.conversationId = this.route.snapshot.paramMap.get('conversationId');
@@ -60,6 +62,7 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
 
   ngOnDestroy(): void {
     this.client.deactivate();
+    this.hangUp();
   }
 
   retrieveMessages(): void {
@@ -93,11 +96,13 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   pauseLocalVideo(): void {
     this.localStream.getTracks().forEach(track => track.enabled = false);
     this.localVideo.nativeElement.srcObject = undefined;
+    this.localVideoActive = false;
   }
 
-  startLocalVideo(): void {
+  async startLocalVideo(): Promise<void> {
     this.localStream.getTracks().forEach(track => track.enabled = true);
     this.localVideo.nativeElement.srcObject = this.localStream;
+    this.localVideoActive = true;
   }
 
   private closeVideoCall(): void {
@@ -110,15 +115,18 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
       this.peerConnection.getTransceivers().forEach(transceiver => transceiver.stop());
       this.peerConnection.close();
       this.peerConnection = null;
+      this.inCall = false;
     }
   }
 
   async call(): Promise<void> {
+    console.log('llamar');
     this.createPeerConnection();
     this.localStream.getTracks().forEach(track => this.peerConnection.addTrack(track, this.localStream));
     try {
       const offer: RTCSessionDescriptionInit = await this.peerConnection.createOffer(this.offerOptions);
       await this.peerConnection.setLocalDescription(offer);
+      this.inCall = true;
       this.webRTCService.sendMessage({type: 'offer', data: offer, conversationId: this.conversationId});
     } catch (err) {
       this.handleGetUserMediaError(err);
@@ -149,7 +157,7 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
       case 'PermissionDeniedError':
         break;
       default:
-        alert('error opening your camera ' + err.message);
+        alert('Error! cuelga la llamada y vuelve a intentarlo');
     }
     this.closeVideoCall();
   }
@@ -193,7 +201,9 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
       msg => {
         switch (msg.type) {
           case 'offer':
-            this.handleOfferMessage(msg.data);
+            if (msg.conversationId === this.conversationId) {
+              this.handleOfferMessage(msg.data);
+            }
             break;
           case 'answer':
             this.handleAnswerMessage(msg.data);
@@ -233,6 +243,7 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
       })
       .then(() => {
         this.webRTCService.sendMessage({type: 'answer', data: this.peerConnection.localDescription, conversationId: this.conversationId});
+        this.inCall = true;
       })
       .catch(this.handleGetUserMediaError);
   }
@@ -242,6 +253,7 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   private handleHangupMessage(data): void {
+    this.pauseLocalVideo();
     this.closeVideoCall();
   }
 
@@ -250,6 +262,8 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   hangUp(): void {
+    console.log('colgar');
+    this.pauseLocalVideo();
     this.webRTCService.sendMessage({type: 'hangup', data: '', conversationId: this.conversationId});
     this.closeVideoCall();
   }

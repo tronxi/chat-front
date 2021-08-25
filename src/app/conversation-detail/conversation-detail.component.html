@@ -1,7 +1,41 @@
 <div class="content">
+  <div class="call-content" [hidden]="!inCall">
+    <div class="call">
+      <video [hidden]="!localVideoActive" #local_video [autoplay]="true" [muted]="true"></video>
+      <video [hidden]="!inCall" #received_video [autoplay]="true"></video>
+    </div>
+
+    <div class="call-buttons">
+      <button class="btn btn-link" *ngIf="!localVideoActive" (click)="startLocalVideo()">
+        <span class="link">
+           <i class="fas fa-video"></i>
+           Cámara
+         </span>
+      </button>
+      <button class="btn btn-link"  *ngIf="localVideoActive" (click)="pauseLocalVideo()">
+        <span class="link">
+           <i class="fas fa-video-slash"></i>
+           Cámara
+         </span>
+      </button>
+      <button class="btn btn-outline-danger btn-danger" *ngIf="inCall" (click)="hangUp()">
+        <span class="link">
+           <i class="fas fa-phone-slash"></i>
+           Colgar
+         </span>
+      </button>
+    </div>
+
+  </div>
   <div class="card">
     <div class="card-header">
       <h4>{{conversationName}}</h4>
+      <button *ngIf="!inCall" class="btn btn-link" (click)="call()">
+        <span class="link">
+           <i class="fas fa-phone"></i>
+           Llamar
+         </span>
+      </button>
     </div>
     <div class="card-body overflow-auto" #scrollMessages>
       <div *ngFor="let message of messageList">
@@ -13,19 +47,8 @@
     </div>
 
     <div class="input-row">
-      <input type="text" class="input-message" [(ngModel)]="message">
+      <input type="text" class="input-message" [(ngModel)]="message" (keyup.enter)="send()">
       <button class="btn btn-link" (click)="send()">Enviar</button>
     </div>
   </div>
-  <div class="card">
-    <div class="card-header">
-    </div>
-    <div class="card-body">
-      <video #local_video [autoplay]="true" [muted]="true"></video>
-      <video #received_video [autoplay]="true"></video>
-      <button class="btn" (click)="startLocalVideo()">Start Local</button>
-      <button class="btn" (click)="pauseLocalVideo()">Stop local</button>
-      <button class="btn" (click)="call()">Call</button>
-      <button class="btn" (click)="hangUp()">Hangup</button>
-    </div>
-  </div></div>
+</div>
