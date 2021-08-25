@@ -146,14 +146,12 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
       case 'PermissionDeniedError':
         break;
       default:
-        console.log(err);
-        alert('error opening your camera' + err.message);
+        alert('error opening your camera ' + err.message);
     }
     this.closeVideoCall();
   }
 
   private handleICECandidateEvent = (event: RTCPeerConnectionIceEvent) => {
-    console.log(event);
     if (event.candidate) {
       this.webRTCService.sendMessage({
         type: 'ice-candidate',
@@ -164,7 +162,6 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   private handleIceConnectionStateChangeEvent = (event: Event) => {
-    console.log(event);
     switch (this.peerConnection.iceConnectionState) {
       case 'closed':
       case 'failed':
@@ -175,7 +172,6 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   private handleSignalingStateEvent = (event: Event) => {
-    console.log(event);
     switch (this.peerConnection.signalingState) {
       case 'closed':
         this.closeVideoCall();
@@ -184,7 +180,6 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   private handleTrackEvent = (event: RTCTrackEvent) => {
-    console.log(event);
     this.receivedVideo.nativeElement.srcObject = event.streams[0];
   }
 
@@ -207,7 +202,6 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
             this.handleICECandidateMessage(msg.data);
             break;
           default:
-            console.log('unkonw message of type' + msg.type);
         }
       },
       error => console.log(error)
@@ -249,12 +243,7 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   private handleICECandidateMessage(data): void {
-    this.peerConnection.addIceCandidate(data)
-      .catch(this.reportError);
-  }
-
-  private reportError = (e: Error) => {
-    console.log('got error: ' + e.name);
+    this.peerConnection.addIceCandidate(data);
   }
 
   hangUp(): void {
