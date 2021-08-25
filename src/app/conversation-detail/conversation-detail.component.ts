@@ -120,7 +120,6 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   async call(): Promise<void> {
-    console.log('llamar');
     this.createPeerConnection();
     this.localStream.getTracks().forEach(track => this.peerConnection.addTrack(track, this.localStream));
     try {
@@ -262,7 +261,6 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
   }
 
   hangUp(): void {
-    console.log('colgar');
     this.pauseLocalVideo();
     this.webRTCService.sendMessage({type: 'hangup', data: '', conversationId: this.conversationId});
     this.closeVideoCall();
