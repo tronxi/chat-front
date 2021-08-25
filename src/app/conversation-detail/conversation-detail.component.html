@@ -17,4 +17,15 @@
       <button class="btn btn-link" (click)="send()">Enviar</button>
     </div>
   </div>
-</div>
+  <div class="card">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+      <video #local_video [autoplay]="true" [muted]="true"></video>
+      <video #received_video [autoplay]="true"></video>
+      <button class="btn" (click)="startLocalVideo()">Start Local</button>
+      <button class="btn" (click)="pauseLocalVideo()">Stop local</button>
+      <button class="btn" (click)="call()">Call</button>
+      <button class="btn" (click)="hangUp()">Hangup</button>
+    </div>
+  </div></div>

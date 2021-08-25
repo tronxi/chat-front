@@ -42,3 +42,8 @@
   display: flex;
   justify-content: space-around;
 }
+
+video {
+  width: 100%;
+  background: gray;
+}
