@@ -7,11 +7,12 @@ RUN cd chat-front && git checkout $BRANCH
 
 FROM node:current-alpine3.12 as builder
 ARG ENVIRONMENT=dev
+ARG PATH=/
 COPY --from="git" /repo/chat-front /front
 WORKDIR /front
 RUN npm install -y
 RUN npm install -g @angular/cli -y
-RUN ng build --configuration=$ENVIRONMENT --base-href /chat/
+RUN ng build --configuration=$ENVIRONMENT --base-href $PATH
 
 FROM nginx:1.17.6-alpine
 RUN rm -r /usr/share/nginx/html/
