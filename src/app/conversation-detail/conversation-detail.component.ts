@@ -87,6 +87,7 @@ export class ConversationDetailComponent implements OnInit, OnDestroy, AfterView
 
   private async requestMediaDevices(): Promise<void> {
     this.localStream = await navigator.mediaDevices.getUserMedia(this.mediaConstraints);
+    this.pauseLocalVideo();
   }
 
   pauseLocalVideo(): void {
