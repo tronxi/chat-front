@@ -5,7 +5,7 @@ ADD https://api.github.com/repos/tronxi/chat-front/git/refs/heads/master version
 RUN git clone https://github.com/tronxi/chat-front.git
 RUN cd chat-front && git checkout $BRANCH
 
-FROM node:current-alpine3.12 as builder
+FROM node:lts-alpine3.14 as builder
 ARG ENVIRONMENT=local
 ARG PATH
 COPY --from="git" /repo/chat-front /front
