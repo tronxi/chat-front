@@ -2,6 +2,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireMessagingModule } from "@angular/fire/messaging";
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
@@ -13,6 +15,7 @@ import {ConversationListComponent} from './conversation-list/conversation-list.c
 import {UserListComponent} from './user-list/user-list.component';
 import {TokenInterceptorService} from './interceptors/tokenInterceptor';
 import { ConversationDetailComponent } from './conversation-detail/conversation-detail.component';
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { ConversationDetailComponent } from './conversation-detail/conversation-
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireMessagingModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

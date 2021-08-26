@@ -32,12 +32,10 @@ export class WebrtcService {
       url: environment.wsUrl + '/' + userId,
       openObserver: {
         next: () => {
-          console.log('WebRTC connection OK');
         }
       },
       closeObserver: {
         next: () => {
-          console.log('WebRTC connection closed');
           this.socket$ = undefined;
           this.connect(userId);
         }
