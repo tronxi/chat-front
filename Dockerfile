@@ -6,8 +6,8 @@ RUN git clone https://github.com/tronxi/chat-front.git
 RUN cd chat-front && git checkout $BRANCH
 
 FROM node:current-alpine3.12 as builder
-ARG ENVIRONMENT=dev
-ARG PATH=/
+ARG ENVIRONMENT=local
+ARG PATH
 COPY --from="git" /repo/chat-front /front
 WORKDIR /front
 RUN npm install -y
