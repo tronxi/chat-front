@@ -38,6 +38,12 @@
           },
           "configurations": {
             "docker": {
+              "assets": [
+                "src/favicon.ico",
+                "src/assets",
+                "src/manifest.json",
+                "src/chat/firebase-messaging-sw.js"
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -45,7 +51,6 @@
                 }
               ]
             },
-            "local": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
