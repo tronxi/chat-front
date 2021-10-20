@@ -1,6 +1,5 @@
 <div class="content parent-column">
   <h1 class="item">WebChat</h1>
-  {{baseRef}}
   <input class="item" type="text" [(ngModel)]="user" placeholder="Usuario">
   <input class="item" type="password" [(ngModel)]="password" placeholder="Contraseña" (keyup.enter)="login()">
   <button class="item btn btn-info" (click)="login()" [disabled]="disabled()">Login</button>
