@@ -3,7 +3,8 @@ import {LoginService} from '../services/login.service';
 import {TokenService} from '../services/token.service';
 import {Router} from '@angular/router';
 import {AngularFireMessaging} from '@angular/fire/messaging';
-import {NotificationTokenService} from "../services/notification-token.service";
+import {NotificationTokenService} from '../services/notification-token.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   showError = false;
   user = '';
   password = '';
+  baseRef = environment.baseRef;
 
   constructor(private loginService: LoginService,
               private tokenService: TokenService,
