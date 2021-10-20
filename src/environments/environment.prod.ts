@@ -6,7 +6,7 @@ declare global {
 
 export const environment = {
   production: true,
-  url: window.env.url || 'http://localhost:8080/socket',
+  url: window.env.url || 'http://localhost:8080',
   wsUrl: window.env.wsUrl || 'ws://localhost:8080/socket',
   baseRef: window.env.baseRef || '/',
   firebaseConfig: {
