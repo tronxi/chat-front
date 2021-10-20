@@ -43,7 +43,7 @@ import {APP_BASE_HREF} from '@angular/common';
     multi: true
   }, {
     provide: APP_BASE_HREF,
-    useValue: '/'
+    useValue: environment.baseRef
   }],
   bootstrap: [AppComponent]
 })
