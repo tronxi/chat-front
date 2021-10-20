@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   url: 'https://tronxi.ddns.net/chat-nginx',
   wsUrl: 'wss://tronxi.ddns.net/chat-nginx/socket',
+  baseRef: '/chat-nginx',
   firebaseConfig: {
     apiKey: 'AIzaSyDE3WM57i0zAjs41iU7wNcvoigQLwFy9tI',
     authDomain: 'chat-7617c.firebaseapp.com',

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireMessagingModule } from "@angular/fire/messaging";
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
@@ -15,7 +15,8 @@ import {ConversationListComponent} from './conversation-list/conversation-list.c
 import {UserListComponent} from './user-list/user-list.component';
 import {TokenInterceptorService} from './interceptors/tokenInterceptor';
 import { ConversationDetailComponent } from './conversation-detail/conversation-detail.component';
-import {environment} from "../environments/environment";
+import {environment} from '../environments/environment';
+import {APP_BASE_HREF} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,9 @@ import {environment} from "../environments/environment";
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
+  }, {
+    provide: APP_BASE_HREF,
+    useValue: '/'
   }],
   bootstrap: [AppComponent]
 })
