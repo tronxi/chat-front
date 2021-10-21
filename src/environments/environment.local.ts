@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   url: 'http://localhost:8080',
   wsUrl: 'ws://localhost:8080/socket',
-  baseRef: '/',
+  baseRef: '\/',
   firebaseConfig: {
     apiKey: 'AIzaSyDE3WM57i0zAjs41iU7wNcvoigQLwFy9tI',
     authDomain: 'chat-7617c.firebaseapp.com',
